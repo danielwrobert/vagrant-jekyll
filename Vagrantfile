@@ -66,7 +66,8 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y curl vim
+    sudo apt-get install -y build-essential curl vim
+    sudo apt-get install git-all
 
     # Install RVM, Ruby 2.2, and Jekyll
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
