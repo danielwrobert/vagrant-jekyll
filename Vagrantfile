@@ -77,5 +77,6 @@ Vagrant.configure(2) do |config|
     source /home/vagrant/.profile
     rvm install 2.2
     gem install jekyll
+    gem install bundler
   SHELL
 end
