@@ -65,17 +65,25 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
+    echo "Provisioning Virtual Machine..."
     sudo apt-get update
-    sudo apt-get install -y build-essential curl vim
-    sudo apt-get install git-all
+
+    echo "Installing developer packages..."
+    sudo apt-get install build-essential curl vim -y > /dev/null
+
+    echo "Installing Git..."
+    sudo apt-get install git -y > /dev/null
 
     # Install RVM, Ruby 2.2, and Jekyll
+    echo "Installing RVM and Ruby..."
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
     gpg --list-keys D39DC0E3 > /dev/null
     if [[ $? != 0 ]]; then curl -sSL https://rvm.io/mpapis.asc | gpg --import - ; fi
     curl -sSL https://get.rvm.io | bash -s stable
     source /home/vagrant/.profile
     rvm install 2.2
+
+    echo "Installing Jekyll..."
     gem install jekyll
     gem install bundler
   SHELL
